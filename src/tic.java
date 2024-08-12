@@ -54,8 +54,8 @@ public class tic implements ActionListener
 		turn.setBounds(10,25,200,100);
 		
 		
-		reset.setBounds(270,10,100,50);
-		reset.setFont(new Font("",Font.PLAIN,20));
+		reset.setBounds(260,10,120,50);
+		reset.setFont(new Font("",Font.PLAIN,24));
 		reset.setForeground(Color.RED);
 		reset.setBackground(Color.lightGray);
 		reset.setFocusable(false);
