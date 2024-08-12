@@ -97,7 +97,15 @@ public class tic implements ActionListener
 				state[i]='O';
 			}
 		}
-		
+		int count=0;
+		for(int i=0;i<9;i++)
+		{
+
+			if(state[i]=='X' || state[i]=='O')
+				count++;
+			if(count==9)
+				turn.setText("Draw!");
+		}
 		if(state[0]==state[1]&&state[1]==state[2]&&state[2]!='\u0000' || state[3]==state[4]&&state[4]==state[5]&&state[5]!='\u0000' || state[6]==state[7]&&state[7]==state[8]&&state[8]!='\u0000' || state[0]==state[3]&&state[3]==state[6]&&state[6]!='\u0000' || state[1]==state[4]&&state[4]==state[7]&&state[7]!='\u0000' || state[2]==state[5]&&state[5]==state[8]&&state[2]!='\u0000'  || state[2]==state[4]&&state[4]==state[6]&&state[2]!='\u0000' || state[0]==state[4]&&state[4]==state[8]&&state[8]!='\u0000' )
 		{
 			if(turn1=='X')
@@ -106,12 +114,7 @@ public class tic implements ActionListener
 				turn.setText("X wins!");
 			flag=1;
 		}
-		for(int i=0;i<9;i++)
-		{
-			if(state[0]=='\u0000')
-				break;
-			turn.setText("Draw!");
-		}
+
 		
 		if(e.getSource()==reset)
 		{
