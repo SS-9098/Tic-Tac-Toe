@@ -106,6 +106,12 @@ public class tic implements ActionListener
 				turn.setText("X wins!");
 			flag=1;
 		}
+		for(int i=0;i<9;i++)
+		{
+			if(state[0]=='\u0000')
+				break;
+			turn.setText("Draw!");
+		}
 		
 		if(e.getSource()==reset)
 		{
