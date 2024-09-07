@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.LineBorder;
 
 public class tic implements ActionListener
 {
@@ -35,18 +36,20 @@ public class tic implements ActionListener
 		new tic();
 		JFrame frame=new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(400,500);
+		frame.setSize(420,510);
 		frame.setTitle("Tic Tac Toe");
 		frame.setLayout(null);
+		frame.setLocationRelativeTo(null);
+		frame.getContentPane().setBackground(Color.LIGHT_GRAY);
 		Font font=new Font("Camp",Font.PLAIN,50);
 		
 		JPanel game=new JPanel();
 		game.setLayout(new GridLayout(3,3,10,10));
-		game.setBounds(0,100,388,363);
+		game.setBounds(10,100,388,363);
 		game.setBackground(Color.LIGHT_GRAY);
 		
 		
-		score.setBounds(0,0,388,100);
+		score.setBounds(10,0,388,100);
 		score.setBackground(Color.LIGHT_GRAY);
 		score.setLayout(null);
 		
@@ -58,6 +61,7 @@ public class tic implements ActionListener
 		reset.setFont(new Font("",Font.PLAIN,24));
 		reset.setForeground(Color.RED);
 		reset.setBackground(Color.lightGray);
+		reset.setBorder(new LineBorder(Color.darkGray));
 		reset.setFocusable(false);
 		
 		for(int i=0;i<9;i++)
@@ -66,6 +70,7 @@ public class tic implements ActionListener
 			buttons[i].setFont(font);
 			buttons[i].setForeground(Color.black);
 			buttons[i].setBackground(Color.gray);
+			buttons[i].setBorder(new LineBorder(Color.darkGray));
 			game.add(buttons[i]);
 		}
 		
@@ -118,7 +123,7 @@ public class tic implements ActionListener
 		
 		if(e.getSource()==reset)
 		{
-			turn.setText("");
+			turn.setText("X's turn");
 			flag=0;
 			turn1='X';
 			for(int i=0;i<9;i++)
