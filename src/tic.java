@@ -20,6 +20,7 @@ public class tic implements ActionListener
 	static JButton[] buttons=new JButton[9];
 	static JButton reset=new JButton("RESET");
 	static JButton ai = new JButton("AI OFF");
+	static AI obj = new AI();
 	
 	void init()
 	{
@@ -91,6 +92,15 @@ public class tic implements ActionListener
 		frame.setVisible(true);
 	}
 
+	public void AI()
+	{
+		int move = obj.move(state);
+		buttons[move].setText("O");
+		turn1='X';
+		turn.setText("X's Turn");
+		state[move]='O';
+	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
@@ -102,6 +112,8 @@ public class tic implements ActionListener
 				turn1='O';
 				turn.setText("O's Turn");
 				state[i]='X';
+				if(ai.getBackground()==Color.GREEN)
+					AI();
 			}
 			
 			else if(e.getSource()==buttons[i] && turn1=='O' && buttons[i].getText()==null && flag==0)
