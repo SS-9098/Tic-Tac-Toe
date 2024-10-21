@@ -60,7 +60,7 @@ public class AI
         {
             for (int j = 0; j < 3; j++)
             {
-                board[i][j] = state[i + j * 3];
+                board[i][j] = state[j + i * 3];
             }
         }
         // Checking for Rows for X or O victory. 
