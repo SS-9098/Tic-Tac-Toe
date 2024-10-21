@@ -3,7 +3,7 @@
 
 _OR_
 
-**Run** ```Tic Tac Toe.JAR``` **file(No IDE Needed)**
+**Run** ```Tic Tac Toe.JAR``` **file (No IDE Needed)**
 
   
 > [!IMPORTANT]
