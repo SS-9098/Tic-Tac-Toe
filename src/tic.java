@@ -92,6 +92,18 @@ public class tic implements ActionListener
 		frame.setVisible(true);
 	}
 
+	public void Win()
+	{
+		if(state[0]==state[1]&&state[1]==state[2]&&state[2]!='\u0000' || state[3]==state[4]&&state[4]==state[5]&&state[5]!='\u0000' || state[6]==state[7]&&state[7]==state[8]&&state[8]!='\u0000' || state[0]==state[3]&&state[3]==state[6]&&state[6]!='\u0000' || state[1]==state[4]&&state[4]==state[7]&&state[7]!='\u0000' || state[2]==state[5]&&state[5]==state[8]&&state[2]!='\u0000'  || state[2]==state[4]&&state[4]==state[6]&&state[2]!='\u0000' || state[0]==state[4]&&state[4]==state[8]&&state[8]!='\u0000' )
+		{
+			if(turn1=='X')
+				turn.setText("O wins!");
+			else
+				turn.setText("X wins!");
+			flag=1;
+		}
+	}
+
 	public void AI()
 	{
 		int move = obj.move(state);
@@ -112,7 +124,8 @@ public class tic implements ActionListener
 				turn1='O';
 				turn.setText("O's Turn");
 				state[i]='X';
-				if(ai.getBackground()==Color.GREEN)
+				Win();
+				if(ai.getBackground()==Color.GREEN && flag!=1)
 					AI();
 			}
 			
@@ -133,14 +146,7 @@ public class tic implements ActionListener
 			if(count==9)
 				turn.setText("Draw!");
 		}
-		if(state[0]==state[1]&&state[1]==state[2]&&state[2]!='\u0000' || state[3]==state[4]&&state[4]==state[5]&&state[5]!='\u0000' || state[6]==state[7]&&state[7]==state[8]&&state[8]!='\u0000' || state[0]==state[3]&&state[3]==state[6]&&state[6]!='\u0000' || state[1]==state[4]&&state[4]==state[7]&&state[7]!='\u0000' || state[2]==state[5]&&state[5]==state[8]&&state[2]!='\u0000'  || state[2]==state[4]&&state[4]==state[6]&&state[2]!='\u0000' || state[0]==state[4]&&state[4]==state[8]&&state[8]!='\u0000' )
-		{
-			if(turn1=='X')
-				turn.setText("O wins!");
-			else
-				turn.setText("X wins!");
-			flag=1;
-		}
+		Win();
 
 		
 		if(e.getSource()==reset)
