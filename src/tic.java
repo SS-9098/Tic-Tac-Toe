@@ -19,8 +19,9 @@ public class tic implements ActionListener
 	static JLabel turn=new JLabel("X's turn");
 	static JButton[] buttons=new JButton[9];
 	static JButton reset=new JButton("RESET");
+	static JButton ai = new JButton("AI OFF");
 	
-	tic()
+	void init()
 	{
 	for(int i=0;i<9;i++)
 	{
@@ -29,11 +30,12 @@ public class tic implements ActionListener
 		buttons[i].addActionListener(this);
 	}
 	reset.addActionListener(this);
+	ai.addActionListener(this);
 	}
 
 	public static void main(String[] args) 
 	{
-		new tic();
+		new tic().init();
 		JFrame frame=new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(420,510);
@@ -63,6 +65,13 @@ public class tic implements ActionListener
 		reset.setBackground(Color.lightGray);
 		reset.setBorder(new LineBorder(Color.darkGray));
 		reset.setFocusable(false);
+
+		ai.setBounds(9,10,120,50);
+		ai.setFont(new Font("",Font.PLAIN,24));
+		ai.setForeground(Color.RED);
+		ai.setBackground(Color.lightGray);
+		ai.setBorder(new LineBorder(Color.darkGray));
+		ai.setFocusable(false);
 		
 		for(int i=0;i<9;i++)
 		{
@@ -73,7 +82,8 @@ public class tic implements ActionListener
 			buttons[i].setBorder(new LineBorder(Color.darkGray));
 			game.add(buttons[i]);
 		}
-		
+
+		score.add(ai);
 		score.add(reset);
 		score.add(turn);
 		frame.add(game);
@@ -131,6 +141,20 @@ public class tic implements ActionListener
 				state[i]='\u0000';
 				buttons[i].setText(null);
 				buttons[i].setEnabled(true);
+			}
+		}
+
+		if(e.getSource()==ai)
+		{
+			if (ai.getBackground() != Color.GREEN)
+			{
+				ai.setText("AI ON");
+				ai.setBackground(Color.green);
+			}
+			else
+			{
+				ai.setText("AI OFF");
+				ai.setBackground(Color.LIGHT_GRAY);
 			}
 		}
 	}
