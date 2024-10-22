@@ -1,3 +1,7 @@
+## Overview
+- You can switch between Two Player or playing against by pressing the AI button
+- AI uses MinMax Algorithm to explore all possible future moves.
+
 ## How to Start
 **Clone Repsitory to IDE and run** ```Tic.Java``` **in the** ```src``` **Folder.**
 
