@@ -107,6 +107,8 @@ public class tic implements ActionListener
 	public void AI()
 	{
 		int move = obj.move(state);
+		if(move == -1)
+			return;
 		buttons[move].setText("O");
 		turn1='X';
 		turn.setText("X's Turn");
