@@ -6,7 +6,7 @@ public class AI {
         for (int i = 0; i < board.length; i++) {
             if (board[i] == '\u0000') {
                 board[i] = 'O';
-                int score = minimax(board, 0, false);
+                int score = minimax(board, false);
                 board[i] = '\u0000';
                 if (score > bestScore) {
                     bestScore = score;
@@ -17,7 +17,7 @@ public class AI {
         return bestMove;
     }
 
-    private int minimax(char[] board, int depth, boolean isMaximizing) {
+    private int minimax(char[] board, boolean isMaximizing) {
         int result = checkWinner(board);
         if (result != 0 || isBoardFull(board)) {
             return result;
@@ -29,7 +29,7 @@ public class AI {
             for (int i = 0; i < board.length; i++) {
                 if (board[i] == '\u0000') {
                     board[i] = 'O';
-                    int score = minimax(board, depth + 1, false);
+                    int score = minimax(board, false);
                     board[i] = '\u0000';
                     bestScore = Math.max(score, bestScore);
                 }
@@ -39,7 +39,7 @@ public class AI {
             for (int i = 0; i < board.length; i++) {
                 if (board[i] == '\u0000') {
                     board[i] = 'X';
-                    int score = minimax(board, depth + 1, true);
+                    int score = minimax(board, true);
                     board[i] = '\u0000';
                     bestScore = Math.min(score, bestScore);
                 }
