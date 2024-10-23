@@ -101,14 +101,21 @@ public class tic implements ActionListener
 
 	public void Win()
 	{
-		if(state[0]==state[1]&&state[1]==state[2]&&state[2]!='\u0000' || state[3]==state[4]&&state[4]==state[5]&&state[5]!='\u0000' || state[6]==state[7]&&state[7]==state[8]&&state[8]!='\u0000' || state[0]==state[3]&&state[3]==state[6]&&state[6]!='\u0000' || state[1]==state[4]&&state[4]==state[7]&&state[7]!='\u0000' || state[2]==state[5]&&state[5]==state[8]&&state[2]!='\u0000'  || state[2]==state[4]&&state[4]==state[6]&&state[2]!='\u0000' || state[0]==state[4]&&state[4]==state[8]&&state[8]!='\u0000' )
-		{
-			if(turn1=='X')
-				turn.setText("O wins!");
-			else
-				turn.setText("X wins!");
-			flag=1;
-		}
+		int[][] winConditions = {
+            {0, 1, 2}, {3, 4, 5}, {6, 7, 8},
+            {0, 3, 6}, {1, 4, 7}, {2, 5, 8},
+            {0, 4, 8}, {2, 4, 6}
+        };
+
+        for (int[] condition : winConditions) {
+            if (state[condition[0]] == state[condition[1]] && state[condition[1]] == state[condition[2]]) {
+                if (state[condition[0]] == 'X')
+                    turn.setText("X wins!");
+                else if (state[condition[0]] == 'O')
+                    turn.setText("O wins!");
+                flag = 1;
+            }
+        }
 	}
 
 	public void AI()
