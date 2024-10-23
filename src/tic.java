@@ -1,25 +1,21 @@
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.GridLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.LineBorder;
 
 public class tic implements ActionListener
 {
 	int flag=0;
-	char turn1='X';
+	char turn1='X', AITurn='-';
 	char[] state=new char[9];
 	static JPanel score=new JPanel();
 	static JLabel turn=new JLabel("X's turn");
 	static JButton[] buttons=new JButton[9];
 	static JButton reset=new JButton("RESET");
 	static JButton ai = new JButton("AI OFF");
+	static JButton aiTurn = new JButton("AI is O");
 	static AI obj = new AI();
 	
 	void init()
@@ -32,6 +28,7 @@ public class tic implements ActionListener
 	}
 	reset.addActionListener(this);
 	ai.addActionListener(this);
+	aiTurn.addActionListener(this);
 	}
 
 	public static void main(String[] args) 
@@ -60,19 +57,28 @@ public class tic implements ActionListener
 		turn.setBounds(10,25,200,100);
 		
 		
-		reset.setBounds(260,10,120,50);
+		reset.setBounds(257,10,123,50);
 		reset.setFont(new Font("",Font.PLAIN,24));
 		reset.setForeground(Color.RED);
 		reset.setBackground(Color.lightGray);
 		reset.setBorder(new LineBorder(Color.darkGray));
 		reset.setFocusable(false);
 
-		ai.setBounds(9,10,120,50);
+		ai.setBounds(9,10,123,50);
 		ai.setFont(new Font("",Font.PLAIN,24));
 		ai.setForeground(Color.RED);
 		ai.setBackground(Color.lightGray);
 		ai.setBorder(new LineBorder(Color.darkGray));
 		ai.setFocusable(false);
+
+		aiTurn.setBounds(133,10,123,50);
+		aiTurn.setFont(new Font("",Font.PLAIN,24));
+		aiTurn.setForeground(Color.RED);
+		aiTurn.setBackground(Color.lightGray);
+		aiTurn.setBorder(new LineBorder(Color.darkGray));
+		aiTurn.setFocusable(false);
+		aiTurn.setVisible(false);
+		aiTurn.setEnabled(false);
 		
 		for(int i=0;i<9;i++)
 		{
@@ -85,6 +91,7 @@ public class tic implements ActionListener
 		}
 
 		score.add(ai);
+		score.add(aiTurn);
 		score.add(reset);
 		score.add(turn);
 		frame.add(game);
@@ -106,13 +113,20 @@ public class tic implements ActionListener
 
 	public void AI()
 	{
-		int move = obj.move(state);
+		int move = obj.move(state, AITurn);
 		if(move == -1)
 			return;
-		buttons[move].setText("O");
-		turn1='X';
-		turn.setText("X's Turn");
-		state[move]='O';
+		if (AITurn == 'O') {
+			buttons[move].setText("O");
+			turn1 = 'X';
+			turn.setText("X's Turn");
+			state[move] = 'O';
+		} else {
+			buttons[move].setText("X");
+			turn1 = 'O';
+			turn.setText("O's Turn");
+			state[move] = 'X';
+		}
 	}
 
 	@Override
@@ -122,20 +136,26 @@ public class tic implements ActionListener
 		{
 			if(e.getSource()==buttons[i] && turn1=='X' && buttons[i].getText()==null && flag==0)
 			{
-				buttons[i].setText("X");
-				turn1='O';
-				turn.setText("O's Turn");
-				state[i]='X';
-				Win();
-				if(ai.getBackground()==Color.GREEN && flag!=1)
-					AI();
+				if(AITurn != 'X') {
+					buttons[i].setText("X");
+					turn1 = 'O';
+					turn.setText("O's Turn");
+					state[i] = 'X';
+					Win();
+					if(AITurn=='O' && flag!=1)
+						AI();
+				}
 			}
 			
 			else if(e.getSource()==buttons[i] && turn1=='O' && buttons[i].getText()==null && flag==0)
 			{
-				buttons[i].setText("O");
-				turn1='X';
-				turn.setText("X's Turn");
+				if(AITurn != 'O') {
+					buttons[i].setText("O");
+					turn1 = 'X';
+					turn.setText("X's Turn");
+					if(AITurn=='X' && flag!=1)
+						AI();
+				}
 				state[i]='O';
 			}
 		}
@@ -170,12 +190,30 @@ public class tic implements ActionListener
 			{
 				ai.setText("AI ON");
 				ai.setBackground(Color.green);
+				aiTurn.setVisible(true);
+				aiTurn.setEnabled(true);
+				AITurn = 'O';
 			}
 			else
 			{
 				ai.setText("AI OFF");
 				ai.setBackground(Color.LIGHT_GRAY);
+				aiTurn.setVisible(false);
+				aiTurn.setEnabled(false);
+				AITurn = '-';
 			}
+		}
+
+		if(e.getSource()==aiTurn)
+		{
+			if(AITurn == 'X') {
+				AITurn = 'O';
+				aiTurn.setText("AI is O");
+			} else if (AITurn == 'O') {
+				AITurn = 'X';
+				aiTurn.setText("AI is X");
+			}
+			AI();
 		}
 	}
 
