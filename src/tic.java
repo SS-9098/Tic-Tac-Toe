@@ -73,7 +73,7 @@ public class tic implements ActionListener
 
 		aiTurn.setBounds(133,10,123,50);
 		aiTurn.setFont(new Font("",Font.PLAIN,24));
-		aiTurn.setForeground(Color.red);
+		aiTurn.setForeground(Color.black);
 		aiTurn.setBackground(Color.lightGray);
 		aiTurn.setBorder(new LineBorder(Color.darkGray));
 		aiTurn.setFocusable(false);
