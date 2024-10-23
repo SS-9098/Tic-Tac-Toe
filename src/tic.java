@@ -153,6 +153,7 @@ public class tic implements ActionListener
 					buttons[i].setText("O");
 					turn1 = 'X';
 					turn.setText("X's Turn");
+					state[i] = 'O';
 					if(AITurn=='X' && flag!=1)
 						AI();
 				}
@@ -182,6 +183,8 @@ public class tic implements ActionListener
 				buttons[i].setText(null);
 				buttons[i].setEnabled(true);
 			}
+			if (AITurn == 'X')
+				AI();
 		}
 
 		if(e.getSource()==ai)
@@ -212,8 +215,8 @@ public class tic implements ActionListener
 			} else if (AITurn == 'O') {
 				AITurn = 'X';
 				aiTurn.setText("AI is X");
+				AI();
 			}
-			AI();
 		}
 	}
 
