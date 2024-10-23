@@ -73,7 +73,7 @@ public class tic implements ActionListener
 
 		aiTurn.setBounds(133,10,123,50);
 		aiTurn.setFont(new Font("",Font.PLAIN,24));
-		aiTurn.setForeground(Color.RED);
+		aiTurn.setForeground(Color.red);
 		aiTurn.setBackground(Color.lightGray);
 		aiTurn.setBorder(new LineBorder(Color.darkGray));
 		aiTurn.setFocusable(false);
@@ -108,7 +108,7 @@ public class tic implements ActionListener
         };
 
         for (int[] condition : winConditions) {
-            if (state[condition[0]] == state[condition[1]] && state[condition[1]] == state[condition[2]]) {
+            if (state[condition[0]] == state[condition[1]] && state[condition[1]] == state[condition[2]] && state[condition[0]] != '\u0000') {
                 if (state[condition[0]] == 'X')
                     turn.setText("X wins!");
                 else if (state[condition[0]] == 'O')
@@ -141,7 +141,7 @@ public class tic implements ActionListener
 	{
 		for(int i=0;i<9;i++)
 		{
-			if(e.getSource()==buttons[i] && turn1=='X' && buttons[i].getText()==null && flag==0)
+			if(e.getSource()==buttons[i] && turn1=='X' && buttons[i].getText()==null && flag!=1)
 			{
 				if(AITurn != 'X') {
 					buttons[i].setText("X");
@@ -154,7 +154,7 @@ public class tic implements ActionListener
 				}
 			}
 			
-			else if(e.getSource()==buttons[i] && turn1=='O' && buttons[i].getText()==null && flag==0)
+			else if(e.getSource()==buttons[i] && turn1=='O' && buttons[i].getText()==null && flag!=1)
 			{
 				if(AITurn != 'O') {
 					buttons[i].setText("O");
