@@ -196,7 +196,7 @@ public class tic implements ActionListener
 
 		if(e.getSource()==ai)
 		{
-			if (ai.getBackground() != Color.GREEN)
+			if (AITurn == '-')
 			{
 				ai.setText("AI ON");
 				ai.setBackground(Color.green);
@@ -210,6 +210,7 @@ public class tic implements ActionListener
 				ai.setBackground(Color.LIGHT_GRAY);
 				aiTurn.setVisible(false);
 				aiTurn.setEnabled(false);
+				turn1 = (AITurn == 'X')? 'O' : 'X';
 				AITurn = '-';
 			}
 		}
