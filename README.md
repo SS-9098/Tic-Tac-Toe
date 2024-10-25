@@ -12,3 +12,8 @@ _OR_
   
 > [!IMPORTANT]
 > Make sure your machine has JDK version 20 or later installed!
+
+
+---
+
+###### Note: It is impossible to beat the AI
