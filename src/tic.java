@@ -223,10 +223,13 @@ public class tic implements ActionListener
 			if(AITurn == 'X') {
 				AITurn = 'O';
 				aiTurn.setText("AI is O");
+				if (turn1 == 'O')
+					AI();
 			} else if (AITurn == 'O') {
 				AITurn = 'X';
 				aiTurn.setText("AI is X");
-				AI();
+				if (turn1 == 'X')
+					AI();
 			}
 		}
 	}
