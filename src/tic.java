@@ -120,6 +120,8 @@ public class tic implements ActionListener
 
 	public void AI()
 	{
+		if(turn1 != AITurn)
+			return;
 		int move = obj.move(state, AITurn);
 		if(move == -1)
 			return;
@@ -203,6 +205,7 @@ public class tic implements ActionListener
 				aiTurn.setVisible(true);
 				aiTurn.setEnabled(true);
 				AITurn = 'O';
+				AI();
 			}
 			else
 			{
