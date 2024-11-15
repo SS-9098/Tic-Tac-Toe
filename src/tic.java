@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Objects;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -10,10 +11,11 @@ public class tic implements ActionListener
 	int flag=0;
 	char turn1='X', AITurn='-';
 	char[] state=new char[9];
-	static JPanel score=new JPanel();
+
 	static JLabel turn=new JLabel("X's turn");
 	static JButton[] buttons=new JButton[9];
 	static JButton reset=new JButton("RESET");
+	static JButton switcher=new JButton("Switch2O");
 	static JButton ai = new JButton("AI OFF");
 	static JButton aiTurn = new JButton("AI is O");
 	static AI obj = new AI();
@@ -29,6 +31,7 @@ public class tic implements ActionListener
 	reset.addActionListener(this);
 	ai.addActionListener(this);
 	aiTurn.addActionListener(this);
+	switcher.addActionListener(this);
 	}
 
 	public static void main(String[] args) 
@@ -42,12 +45,18 @@ public class tic implements ActionListener
 		frame.setLocationRelativeTo(null);
 		frame.getContentPane().setBackground(Color.LIGHT_GRAY);
 		Font font=new Font("Camp",Font.PLAIN,50);
-		
+		JPanel score=new JPanel();
 		JPanel game=new JPanel();
+
 		game.setLayout(new GridLayout(3,3,10,10));
 		game.setBounds(10,100,388,363);
 		game.setBackground(Color.LIGHT_GRAY);
-		
+
+		switcher.setBounds(140,10,100,50);
+		switcher.setFont(new Font("",Font.PLAIN,24));
+		switcher.setForeground(Color.RED);
+		switcher.setBackground(Color.lightGray);
+		switcher.setBorder(new LineBorder(Color.darkGray));
 		
 		score.setBounds(10,0,388,100);
 		score.setBackground(Color.LIGHT_GRAY);
@@ -94,6 +103,7 @@ public class tic implements ActionListener
 		score.add(aiTurn);
 		score.add(reset);
 		score.add(turn);
+		score.add(switcher);
 		frame.add(game);
 		frame.add(score);
 		frame.setVisible(true);
@@ -108,7 +118,7 @@ public class tic implements ActionListener
         };
 
         for (int[] condition : winConditions) {
-            if (state[condition[0]] == state[condition[1]] && state[condition[1]] == state[condition[2]] && state[condition[0]] != '\u0000') {
+            if (Objects.equals(buttons[0].getText(), buttons[1].getText()) &&Objects.equals(buttons[1].getText(), buttons[2].getText()) && buttons[0].getText()!=null) {
                 if (state[condition[0]] == 'X')
                     turn.setText("X wins!");
                 else if (state[condition[0]] == 'O')
@@ -149,7 +159,7 @@ public class tic implements ActionListener
 					buttons[i].setText("X");
 					turn1 = 'O';
 					turn.setText("O's Turn");
-					state[i] = 'X';
+
 					Win();
 					if(AITurn=='O' && flag!=1)
 						AI();
@@ -162,11 +172,11 @@ public class tic implements ActionListener
 					buttons[i].setText("O");
 					turn1 = 'X';
 					turn.setText("X's Turn");
-					state[i] = 'O';
+
 					if(AITurn=='X' && flag!=1)
 						AI();
 				}
-				state[i]='O';
+
 			}
 		}
 		int count=0;
@@ -188,12 +198,28 @@ public class tic implements ActionListener
 			turn1='X';
 			for(int i=0;i<9;i++)
 			{
-				state[i]='\u0000';
+
 				buttons[i].setText(null);
 				buttons[i].setEnabled(true);
 			}
 			if (AITurn == 'X')
 				AI();
+		}
+
+		if(e.getSource()==switcher){
+			int c=0;
+			for(int i=0;i<9;i++){
+				if (Objects.equals(buttons[i].getText(), "X") || Objects.equals(buttons[i].getText(), "O")){
+					c=1;
+					break;
+				}
+
+			}
+			if (c==0){
+				switcher.setText("Switch2X");
+				turn1='O';
+				turn.setText("O's turn");
+			}
 		}
 
 		if(e.getSource()==ai)
